@@ -108,7 +108,7 @@ function Game() {
 
         {turn && (
           <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_300px]">
-            <section className="space-y-5">
+            <section className="space-y-5" aria-busy={loading}>
               {turn.consequence && (
                 <div className="rounded-md border border-primary/50 bg-card p-5 backdrop-blur">
                   <h2 className="text-xs uppercase tracking-widest text-primary">Consequence</h2>
@@ -121,7 +121,7 @@ function Game() {
                   <p className="mt-2 leading-relaxed">{turn.environmentShift}</p>
                 </div>
               )}
-              <div className="rounded-md border bg-card p-6 backdrop-blur">
+              <div className={`rounded-md border bg-card p-6 backdrop-blur transition-opacity duration-500 ${loading ? "opacity-50" : "opacity-100"}`}>
                 <p className="text-lg leading-relaxed">{turn.scene}</p>
               </div>
 
