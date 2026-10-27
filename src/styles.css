@@ -85,3 +85,57 @@
   to { transform: translateX(10%); }
 }
 @utility animate-fog { animation: drift 18s ease-in-out infinite alternate; }
+
+@keyframes flame {
+  0%, 100% { transform: translateX(-50%) scale(1, 1) rotate(-2deg); opacity: 0.95; }
+  25% { transform: translateX(-53%) scale(1.08, 0.92) rotate(2deg); opacity: 0.78; }
+  50% { transform: translateX(-48%) scale(0.92, 1.12) rotate(-1deg); opacity: 1; }
+  75% { transform: translateX(-51%) scale(1.05, 0.96) rotate(3deg); opacity: 0.85; }
+}
+@utility animate-flame { animation: flame 1.1s ease-in-out infinite; }
+
+@keyframes spirit-rise {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  20% { opacity: 0.9; }
+  100% { transform: translateY(-72px) scale(0.35); opacity: 0; }
+}
+@utility animate-spirit { animation: spirit-rise 2.6s ease-in infinite; }
+
+@keyframes ring-pulse {
+  0% { transform: translate(-50%, -50%) scale(0.55); opacity: 0.65; }
+  100% { transform: translate(-50%, -50%) scale(1.55); opacity: 0; }
+}
+@utility animate-ring { animation: ring-pulse 2.2s ease-out infinite; }
+
+@keyframes wisp {
+  0% { transform: translateX(-30%) scaleY(1); }
+  50% { transform: translateX(22%) scaleY(1.18); }
+  100% { transform: translateX(-30%) scaleY(1); }
+}
+@utility animate-wisp { animation: wisp 9s ease-in-out infinite; }
+
+@keyframes sweep {
+  from { transform: translateX(-130%); }
+  to { transform: translateX(330%); }
+}
+@utility animate-sweep { animation: sweep 1.4s ease-in-out infinite; }
+
+@keyframes line-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@utility animate-line-in { animation: line-in 0.5s ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-flame,
+  .animate-spirit,
+  .animate-ring,
+  .animate-wisp,
+  .animate-sweep,
+  .animate-line-in,
+  .animate-fog,
+  .animate-flicker {
+    animation: none !important;
+  }
+}
+

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { playTurn, type Turn } from "@/lib/game.functions";
 import fogTown from "@/assets/fog-town.jpg";
+import { LoadingScene } from "@/components/LoadingScene";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -96,13 +97,18 @@ function Game() {
             <button onClick={() => advance(null)} disabled={loading} className="mt-8 rounded-md bg-primary px-8 py-3 font-display text-2xl text-primary-foreground glow-primary transition hover:scale-105 disabled:opacity-60">
               {loading ? "Summoning..." : "Enter the fog"}
             </button>
+            {loading && (
+              <div className="mt-8 text-left">
+                <LoadingScene label="Opening the fog…" />
+              </div>
+            )}
             {error && <p className="mt-4 text-destructive">{error}</p>}
           </section>
         )}
 
         {turn && (
           <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_300px]">
-            <section className="space-y-5">
+            <section className="space-y-5" aria-busy={loading}>
               {turn.consequence && (
                 <div className="rounded-md border border-primary/50 bg-card p-5 backdrop-blur">
                   <h2 className="text-xs uppercase tracking-widest text-primary">Consequence</h2>
@@ -115,7 +121,7 @@ function Game() {
                   <p className="mt-2 leading-relaxed">{turn.environmentShift}</p>
                 </div>
               )}
-              <div className="rounded-md border bg-card p-6 backdrop-blur">
+              <div className={`rounded-md border bg-card p-6 backdrop-blur transition-opacity duration-500 ${loading ? "opacity-50" : "opacity-100"}`}>
                 <p className="text-lg leading-relaxed">{turn.scene}</p>
               </div>
 
@@ -145,7 +151,7 @@ function Game() {
                   <button onClick={reset} className="mt-6 rounded-md bg-primary px-6 py-2 font-display text-xl text-primary-foreground glow-primary">Play again</button>
                 </div>
               )}
-              {loading && <p className="animate-pulse text-center text-ecto">The Ghost Protocol is deciding your fate...</p>}
+              {loading && <LoadingScene />}
               {error && <p className="text-center text-destructive">{error}</p>}
             </section>
 
