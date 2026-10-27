@@ -45,7 +45,7 @@ Rules:
 - Spooky, atmospheric, PG-13. No gore. Keep it fictional.`;
 
 export const playTurn = createServerFn({ method: "POST" })
-  .inputValidator((d: unknown) => inputSchema.parse(d))
+  .validator((d: unknown) => inputSchema.parse(d))
   .handler(async ({ data }) => {
     const apiKey = process.env["LOVABLE_API_KEY"];
     if (!apiKey) throw new Error("AI is not configured.");
